@@ -37,7 +37,7 @@ const update = function (w) {
 
   const dt = r.GetFrameTime();
   b.jump(bird, gravity, dt);
-  o.moveObstacles(obstacles, obstaclesVelocity, dt);
+  o.update(obstacles, obstaclesVelocity, dt);
 };
 
 const draw = function (w) {

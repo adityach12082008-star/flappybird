@@ -30,9 +30,12 @@ const moveObstacles = function (obstacles, velocity, dt) {
   }
 };
 
+const update = function (obstacles, velocity, dt) {
+  moveObstacles(obstacles, velocity, dt);
+};
+
 module.exports = {
   createObstacle,
   drawObstacles,
-  draw,
-  moveObstacles,
+  update,
 };
