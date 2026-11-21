@@ -27,8 +27,12 @@ function jump(bird, gravity, dt) {
   }
 }
 
+const update = function (bird, gravity, dt) {
+  jump(bird, gravity, dt);
+};
+
 module.exports = {
   createBird,
   drawBird,
-  jump,
+  update,
 };

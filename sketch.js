@@ -36,7 +36,7 @@ const update = function (w) {
   const { bird, obstacles, gravity, obstaclesVelocity } = w;
 
   const dt = r.GetFrameTime();
-  b.jump(bird, gravity, dt);
+  b.update(bird, gravity, dt);
   o.update(obstacles, obstaclesVelocity, dt);
 };
 

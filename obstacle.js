@@ -24,6 +24,7 @@ const drawObstacles = function (obstacles) {
 
 const moveObstacles = function (obstacles, velocity, dt) {
   const { horizontal: hVelocity } = velocity;
+
   for (const obstacle of obstacles) {
     const { rec } = obstacle;
     rec.x -= hVelocity * dt;
