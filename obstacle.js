@@ -22,8 +22,12 @@ const drawObstacles = function (obstacles) {
   for (const obstacle of obstacles) draw(obstacle);
 };
 
-const moveObstacles = function (obstacles) {
-  for (const obstacle of obstacles) obstacle.rec.x -= 4;
+const moveObstacles = function (obstacles, velocity, dt) {
+  const { horizontal: hVelocity } = velocity;
+  for (const obstacle of obstacles) {
+    const { rec } = obstacle;
+    rec.x -= hVelocity * dt;
+  }
 };
 
 module.exports = {
