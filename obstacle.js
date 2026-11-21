@@ -18,7 +18,17 @@ const draw = function (obstacle) {
   );
 };
 
+const drawObstacles = function (obstacles) {
+  for (const obstacle of obstacles) draw(obstacle);
+};
+
+const moveObstacles = function (obstacles) {
+  for (const obstacle of obstacles) obstacle.rec.x -= 4;
+};
+
 module.exports = {
   createObstacle,
+  drawObstacles,
   draw,
+  moveObstacles,
 };
