@@ -32,9 +32,9 @@ const setup = function () {
   };
 
   const { minGapX, gapV } = spawnData;
-  const bgColor = { r: 16, g: 11, b: 43, a: 255 };
-  const birdColor = { r: 255, g: 53, b: 197, a: 255 };
-  const obsColor = { r: 0, g: 229, b: 255, a: 255 };
+  const bgColor = { r: 38, g: 10, b: 24, a: 255 };
+  const birdColor = { r: 246, g: 200, b: 95, a: 255 };
+  const obsColor = { r: 142, g: 35, b: 72, a: 255 };
 
   const tObstacle = o.createObstacle(r.GetScreenWidth(), 0, 40, 300, obsColor);
   const bObstacle = o.createObstacle(
