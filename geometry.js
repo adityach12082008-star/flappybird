@@ -1,3 +1,5 @@
+const { GetScreenHeight } = require("raylib");
+
 const hasCollodedHorizontally = function (rec1, rec2) {
   const { x: x1, width: width1 } = rec1;
   const { x: x2, width: width2 } = rec2;
@@ -15,6 +17,14 @@ const checkCollision = function (rec1, rec2) {
   );
 };
 
+const isOutOfBounds = function (bird) {
+  const { rec: bird } = bird;
+  if (bird.x >= 0 && bird.x + bird.height >= GetScreenHeight()) return true;
+
+  return false;
+};
+
 module.exports = {
   checkCollision,
+  isOutOfBounds,
 };
