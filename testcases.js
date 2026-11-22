@@ -17,16 +17,10 @@ const main = function () {
 };
 
 const testBounds = function () {
-  test(2, 30, false, "Object is inside the screen");
-  test(100, 50, false, "Object is completely inside the screen");
-  test(0, 30, false, "Object is at the left boundary");
-  test(770, 30, true, "Object touches the right boundary");
-  test(771, 30, true, "Object crosses the right boundary");
-  test(801, 30, true, "Object is beyond the right boundary");
-  test(-1, 30, true, "Object crosses the left boundary");
-  test(-30, 30, true, "Object is completely outside the left boundary");
-  test(400, 400, true, "Object reaches the right boundary exactly");
-  test(500, 100, false, "Object is within the screen limits");
+  test(0, 0, false, "Object has zero height at the top boundary");
+  test(799, 1, true, "Object reaches the maximum height exactly");
+  test(800, 0, true, "Object starts at the maximum height");
+  test(-10, 0, true, "Object is above the top boundary");
 };
 
 main();
