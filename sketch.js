@@ -21,32 +21,49 @@ const setup = function () {
 
   const gravity = 0.6 * screen.targetFPS * screen.targetFPS;
   const obstaclesVelocity = { horizontal: 240, vertical: 0 };
+  const obsGap = { minGapX: 300, maxGacpX: 500, gapV: 175 };
 
-  const obstacle1 = o.createObstacle(800, 0, 40, 300, r.RED);
+  const tObstacle = o.createObstacle(800, 0, 40, 300, r.RED);
+  const bObstacle = o.createObstacle(
+    800,
+    300 + 175,
+    40,
+    800 - 300 + 175,
+    r.RED,
+  );
 
-  const obstacles = [obstacle1];
+  const topObstacles = [tObstacle];
+  const bottomObstacles = [bObstacle];
 
   const bird = b.createBird(40, screen.WIDTH, 32, 48, 500, r.BLUE);
 
-  return { bird, obstacles, obstaclesVelocity, gravity };
+  return {
+    bird,
+    topObstacles,
+    bottomObstacles,
+    obstaclesVelocity,
+    obsGap,
+    gravity,
+  };
 };
 
 const update = function (w) {
-  const { bird, obstacles, gravity, obstaclesVelocity } = w;
+  const { bird, topObstacles, bottomObstacles, gravity, obstaclesVelocity } = w;
 
   const dt = r.GetFrameTime();
   b.update(bird, gravity, dt);
-  o.update(obstacles, obstaclesVelocity, dt);
+  o.update(topObstacles, bottomObstacles, obstaclesVelocity, dt);
 };
 
 const draw = function (w) {
-  const { bird, obstacles } = w;
+  const { bird, topObstacles, bottomObstacles } = w;
 
   r.BeginDrawing();
   r.ClearBackground(r.WHITE);
 
   b.drawBird(bird);
-  o.drawObstacles(obstacles);
+  o.drawObstacles(topObstacles);
+  o.drawObstacles(bottomObstacles);
 
   r.EndDrawing();
 };
