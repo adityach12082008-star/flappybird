@@ -11,7 +11,7 @@ const setup = function () {
   const screen = {
     WIDTH: 800,
     HEIGHT: 800,
-    FPS: 60,
+    FPS: 120,
     targetFPS: 60,
   };
 
@@ -65,23 +65,20 @@ const setup = function () {
 const update = function (w) {
   const {
     bird,
-    tObstacles,
-    bObstacles,
+    tObstacles: tObs,
+    bObstacles: bObs,
     gravity,
     obsVelocity,
     spawnData,
     obsColor,
   } = w;
 
-  game.state.isOver = game.checkIsOver(bird.rec, [
-    ...tObstacles,
-    ...bObstacles,
-  ]);
+  game.state.isOver = game.checkIsOver(bird.rec, [...tObs, ...bObs]);
   if (game.state.isOver) return;
 
   const dt = r.GetFrameTime();
   b.update(bird, gravity, dt);
-  o.update(tObstacles, bObstacles, obsVelocity, spawnData, obsColor, dt);
+  o.update(tObs, bObs, obsVelocity, spawnData, obsColor, dt);
 };
 
 const draw = function (w) {
