@@ -32,15 +32,15 @@ const setup = function () {
     r.RED,
   );
 
-  const topObstacles = [tObstacle];
-  const bottomObstacles = [bObstacle];
+  const tObstacles = [tObstacle];
+  const bObstacles = [bObstacle];
 
   const bird = b.createBird(40, screen.WIDTH, 32, 48, 500, r.BLUE);
 
   return {
     bird,
-    topObstacles,
-    bottomObstacles,
+    tObstacles,
+    bObstacles,
     obstaclesVelocity,
     obsGap,
     gravity,
@@ -48,22 +48,22 @@ const setup = function () {
 };
 
 const update = function (w) {
-  const { bird, topObstacles, bottomObstacles, gravity, obstaclesVelocity } = w;
+  const { bird, tObstacles, bObstacles, gravity, obstaclesVelocity } = w;
 
   const dt = r.GetFrameTime();
   b.update(bird, gravity, dt);
-  o.update(topObstacles, bottomObstacles, obstaclesVelocity, dt);
+  o.update(tObstacles, bObstacles, obstaclesVelocity, dt);
 };
 
 const draw = function (w) {
-  const { bird, topObstacles, bottomObstacles } = w;
+  const { bird, tObstacles, bObstacles } = w;
 
   r.BeginDrawing();
   r.ClearBackground(r.WHITE);
 
   b.drawBird(bird);
-  o.drawObstacles(topObstacles);
-  o.drawObstacles(bottomObstacles);
+  o.drawObstacles(tObstacles);
+  o.drawObstacles(bObstacles);
 
   r.EndDrawing();
 };
