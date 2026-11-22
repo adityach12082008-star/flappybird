@@ -17,10 +17,12 @@ const main = function () {
 };
 
 const testBounds = function () {
-  test(0, 0, false, "Object has zero height at the top boundary");
-  test(799, 1, true, "Object reaches the maximum height exactly");
-  test(800, 0, true, "Object starts at the maximum height");
-  test(-10, 0, true, "Object is above the top boundary");
+  test(100, 50, false, "Object is inside the screen");
+  test(300, 100, false, "Object is in the middle of the screen");
+  test(0, 30, false, "Object starts at the top boundary");
+  test(770, 30, true, "Object reaches the bottom boundary");
+  test(-1, 30, true, "Object crosses the top boundary");
+  test(771, 30, true, "Object crosses the bottom boundary");
 };
 
 main();
