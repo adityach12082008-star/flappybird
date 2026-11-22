@@ -18,10 +18,7 @@ const checkCollision = function (rec1, rec2) {
 };
 
 const isOutOfBounds = function (bird) {
-  const { rec: birds } = bird;
-  if (birds.x >= 0 && birds.x + birds.height >= r.GetScreenHeight())
-    return true;
-
+  if (bird.y < 0 || bird.y + bird.height >= r.GetScreenHeight()) return true;
   return false;
 };
 
