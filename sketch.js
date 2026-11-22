@@ -1,6 +1,7 @@
 const r = require("raylib");
 const b = require("./bird.js");
 const o = require("./obstacle.js");
+const game = require("./game.js");
 
 const running = function () {
   return !r.WindowShouldClose();
@@ -58,6 +59,12 @@ const setup = function () {
 
 const update = function (w) {
   const { bird, tObstacles, bObstacles, gravity, obsVelocity, spawnData } = w;
+
+  game.state.isOver = game.checkIsOver(bird.rec, [
+    ...tObstacles,
+    ...bObstacles,
+  ]);
+  if (game.state.isOver) return;
 
   const dt = r.GetFrameTime();
   b.update(bird, gravity, dt);
