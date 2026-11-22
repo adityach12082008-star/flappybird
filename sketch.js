@@ -25,8 +25,8 @@ const setup = function () {
   const spawnData = {
     minGapX: 300,
     maxGapX: 500,
-    minH: 150,
-    maxH: 650,
+    minH: 300,
+    maxH: 600,
     gapV: 175,
     spawnPoint: 500,
   };
@@ -45,7 +45,7 @@ const setup = function () {
   const tObstacles = [tObstacle];
   const bObstacles = [bObstacle];
 
-  const bird = b.createBird(40, screen.WIDTH, 32, 48, 500, r.BLUE);
+  const bird = b.createBird(40, screen.WIDTH, 30, 30, 500, r.BLUE);
 
   return {
     bird,
@@ -77,6 +77,14 @@ const draw = function (w) {
   r.BeginDrawing();
   r.ClearBackground(r.WHITE);
 
+  r.DrawRectangleGradientV(
+    0,
+    0,
+    r.GetScreenWidth(),
+    r.GetScreenHeight(),
+    r.SKYBLUE,
+    r.WHITE,
+  );
   b.drawBird(bird);
   o.drawObstacles(tObstacles);
   o.drawObstacles(bObstacles);
