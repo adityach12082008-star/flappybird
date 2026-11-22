@@ -20,15 +20,16 @@ const setup = function () {
   r.SetTargetFPS(screen.FPS);
 
   const gravity = 0.6 * screen.targetFPS * screen.targetFPS;
-  const obstaclesVelocity = { horizontal: 240, vertical: 0 };
-  const obsGap = { minGapX: 300, maxGacpX: 500, gapV: 175 };
+  const obsVelocity = { horizontal: 240, vertical: 0 };
+  const obsGap = { minGapX: 300, maxGapX: 500, gapV: 175 };
+  const { minGapX, gapV } = obsGap;
 
   const tObstacle = o.createObstacle(800, 0, 40, 300, r.RED);
   const bObstacle = o.createObstacle(
     800,
-    300 + 175,
+    minGapX + gapV,
     40,
-    800 - 300 + 175,
+    800 - minGapX + gapV,
     r.RED,
   );
 
@@ -41,18 +42,18 @@ const setup = function () {
     bird,
     tObstacles,
     bObstacles,
-    obstaclesVelocity,
+    obsVelocity,
     obsGap,
     gravity,
   };
 };
 
 const update = function (w) {
-  const { bird, tObstacles, bObstacles, gravity, obstaclesVelocity } = w;
+  const { bird, tObstacles, bObstacles, gravity, obsVelocity, obsGap } = w;
 
   const dt = r.GetFrameTime();
   b.update(bird, gravity, dt);
-  o.update(tObstacles, bObstacles, obstaclesVelocity, dt);
+  o.update(tObstacles, bObstacles, obsVelocity, obsGap, dt);
 };
 
 const draw = function (w) {
