@@ -31,8 +31,32 @@ const moveObstacles = function (obstacles, velocity, dt) {
   }
 };
 
+const getRandom = function (min, max) {
+  return Math.random() * (max - min) + min;
+};
+
+const generateRandomObstacle = function (obstacles, lastObstacle) {
+  const { rec: lastObs } = lastObstacle;
+
+  const x = getRandom(lastObs.x + 300, lastObs.x + 500);
+  const height = getRandom(150, 650);
+
+  obstacles.push(createObstacle(x, 0, 40, height, r.RED));
+};
+
+const handleObstacles = function (obstacles, lastObs) {
+  generateRandomObstacle(obstacles, lastObs);
+};
+
+const generateRandom = function (obstacles) {
+  if (obstacles[0].rec.x < 600) {
+    handleObstacles(obstacles, obstacles.at(-1));
+  }
+};
+
 const update = function (obstacles, velocity, dt) {
   moveObstacles(obstacles, velocity, dt);
+  generateRandom(obstacles);
 };
 
 module.exports = {

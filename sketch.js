@@ -22,10 +22,9 @@ const setup = function () {
   const gravity = 0.6 * screen.targetFPS * screen.targetFPS;
   const obstaclesVelocity = { horizontal: 240, vertical: 0 };
 
-  const obstacle1 = o.createObstacle(400, 0, 40, 300, r.RED);
-  const obstacle2 = o.createObstacle(700, 0, 40, 600, r.RED);
+  const obstacle1 = o.createObstacle(800, 0, 40, 300, r.RED);
 
-  const obstacles = [obstacle1, obstacle2];
+  const obstacles = [obstacle1];
 
   const bird = b.createBird(40, screen.WIDTH, 32, 48, 500, r.BLUE);
 
