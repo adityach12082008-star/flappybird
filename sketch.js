@@ -32,20 +32,23 @@ const setup = function () {
   };
 
   const { minGapX, gapV } = spawnData;
+  const bgColor = { r: 16, g: 11, b: 43, a: 255 };
+  const birdColor = { r: 255, g: 53, b: 197, a: 255 };
+  const obsColor = { r: 0, g: 229, b: 255, a: 255 };
 
-  const tObstacle = o.createObstacle(r.GetScreenWidth(), 0, 40, 300, r.RED);
+  const tObstacle = o.createObstacle(r.GetScreenWidth(), 0, 40, 300, obsColor);
   const bObstacle = o.createObstacle(
     r.GetScreenWidth(),
     minGapX + gapV,
     40,
     r.GetScreenHeight() - minGapX + gapV,
-    r.RED,
+    obsColor,
   );
 
   const tObstacles = [tObstacle];
   const bObstacles = [bObstacle];
 
-  const bird = b.createBird(40, screen.WIDTH, 30, 30, 500, r.BLUE);
+  const bird = b.createBird(40, screen.WIDTH, 30, 30, 500, birdColor);
 
   return {
     bird,
@@ -54,11 +57,21 @@ const setup = function () {
     obsVelocity,
     spawnData,
     gravity,
+    bgColor,
+    obsColor,
   };
 };
 
 const update = function (w) {
-  const { bird, tObstacles, bObstacles, gravity, obsVelocity, spawnData } = w;
+  const {
+    bird,
+    tObstacles,
+    bObstacles,
+    gravity,
+    obsVelocity,
+    spawnData,
+    obsColor,
+  } = w;
 
   game.state.isOver = game.checkIsOver(bird.rec, [
     ...tObstacles,
@@ -68,23 +81,16 @@ const update = function (w) {
 
   const dt = r.GetFrameTime();
   b.update(bird, gravity, dt);
-  o.update(tObstacles, bObstacles, obsVelocity, spawnData, dt);
+  o.update(tObstacles, bObstacles, obsVelocity, spawnData, obsColor, dt);
 };
 
 const draw = function (w) {
-  const { bird, tObstacles, bObstacles } = w;
+  const { bird, tObstacles, bObstacles, bgColor } = w;
 
   r.BeginDrawing();
   r.ClearBackground(r.WHITE);
 
-  r.DrawRectangleGradientV(
-    0,
-    0,
-    r.GetScreenWidth(),
-    r.GetScreenHeight(),
-    r.SKYBLUE,
-    r.WHITE,
-  );
+  r.DrawRectangle(0, 0, r.GetScreenWidth(), r.GetScreenHeight(), bgColor);
   b.drawBird(bird);
   o.drawObstacles(tObstacles);
   o.drawObstacles(bObstacles);

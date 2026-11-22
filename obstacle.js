@@ -28,40 +28,52 @@ const getRandom = function (min, max) {
   return Math.random() * (max - min) + min;
 };
 
-const spawnObstacle = function (tObstacle, bObstacle, lastObstacle, spawnData) {
+const spawnObstacle = function (
+  tObstacle,
+  bObstacle,
+  lastObstacle,
+  spawnData,
+  color,
+) {
   const { rec: lastObs } = lastObstacle;
   const { minGapX, maxGapX, minH, maxH, gapV } = spawnData;
 
   const x = getRandom(lastObs.x + minGapX, lastObs.x + maxGapX);
   const height = getRandom(minH, maxH);
 
-  tObstacle.push(createObstacle(x, 0, lastObs.width, height, r.RED));
+  tObstacle.push(createObstacle(x, 0, lastObs.width, height, color));
   bObstacle.push(
     createObstacle(
       x,
       height + gapV,
       lastObs.width,
       r.GetScreenHeight() - height + gapV,
-      r.RED,
+      color,
     ),
   );
 };
 
-const handleObstacles = function (tObstacle, bObstacle, lastObs, spawnData) {
-  spawnObstacle(tObstacle, bObstacle, lastObs, spawnData);
+const handleObstacles = function (
+  tObstacle,
+  bObstacle,
+  lastObs,
+  spawnData,
+  color,
+) {
+  spawnObstacle(tObstacle, bObstacle, lastObs, spawnData, color);
 };
 
-const generateRandom = function (tObstacle, bObstacle, spawnData) {
+const generateRandom = function (tObstacle, bObstacle, spawnData, color) {
   const { spawnPoint } = spawnData;
   if (tObstacle[0].rec.x < spawnPoint) {
-    handleObstacles(tObstacle, bObstacle, tObstacle.at(-1), spawnData);
+    handleObstacles(tObstacle, bObstacle, tObstacle.at(-1), spawnData, color);
   }
 };
 
-const update = function (tObstacle, bObstacle, velocity, spawnData, dt) {
+const update = function (tObstacle, bObstacle, velocity, spawnData, color, dt) {
   moveObstacles(tObstacle, velocity, dt);
   moveObstacles(bObstacle, velocity, dt);
-  generateRandom(tObstacle, bObstacle, spawnData);
+  generateRandom(tObstacle, bObstacle, spawnData, color);
 };
 
 module.exports = {
