@@ -6,19 +6,16 @@ const create = function (x, y, width, height, color) {
   return { rec, color };
 };
 
-const drawObstacle = function (obstacle) {
-  const { rec, color } = obstacle;
+const drawObstacle = function ({ rec, color }) {
   r.DrawRectangleRec(rec, color);
 };
 
-const draw = function (tObstacle) {
-  for (const obstacle of tObstacle) drawObstacle(obstacle, tObstacle);
+const draw = function (obstacles) {
+  for (const obstacle of obstacles) drawObstacle(obstacle, obstacles);
 };
 
-const moveObstacles = function (tObstacle, velocity, dt) {
-  const { horizontal: hVelocity } = velocity;
-
-  for (const obstacle of tObstacle) {
+const moveObstacles = function (obstacles, { horizontal: hVelocity }, dt) {
+  for (const obstacle of obstacles) {
     const { rec } = obstacle;
     rec.x -= hVelocity * dt;
   }
@@ -31,11 +28,10 @@ const getRandom = function (min, max) {
 const spawnObstacle = function (
   tObstacle,
   bObstacle,
-  lastObstacle,
+  { rec: lastObs },
   spawnData,
   color,
 ) {
-  const { rec: lastObs } = lastObstacle;
   const { minGapX, maxGapX, minH, maxH, gapV } = spawnData;
 
   const x = getRandom(lastObs.x + minGapX, lastObs.x + maxGapX);

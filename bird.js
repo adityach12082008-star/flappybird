@@ -11,8 +11,8 @@ function create(x, screenWidth, width, height, vVelocity, color) {
   return { rec, color, birdVelocity, velocity, isStarted };
 }
 
-function draw(bird) {
-  r.DrawRectangleRec(bird.rec, bird.color);
+function draw({ rec, color }) {
+  r.DrawRectangleRec(rec, color);
 }
 
 function jump(bird, gravity, dt) {
