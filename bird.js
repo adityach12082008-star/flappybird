@@ -1,17 +1,17 @@
 const r = require("raylib");
 
-function createBird(x, screenWidth, width, height, vVelocity, color) {
+function create(x, screenWidth, width, height, vVelocity, color) {
   const y = screenWidth / 2;
   const velocity = { x: 0, y: 0 };
   const isStarted = false;
-  const birdVelocity = { x: 0, y: 400 };
+  const birdVelocity = { x: 0, y: vVelocity };
 
   const rec = { x, y, width, height };
 
   return { rec, color, birdVelocity, velocity, isStarted };
 }
 
-function drawBird(bird) {
+function draw(bird) {
   r.DrawRectangleRec(bird.rec, bird.color);
 }
 
@@ -32,7 +32,7 @@ const update = function (bird, gravity, dt) {
 };
 
 module.exports = {
-  createBird,
-  drawBird,
+  create,
+  draw,
   update,
 };

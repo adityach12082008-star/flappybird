@@ -1,5 +1,5 @@
 const r = require("raylib");
-const b = require("./bird.js");
+const bird = require("./bird.js");
 const obstacle = require("./obstacle.js");
 const game = require("./game.js");
 
@@ -32,9 +32,9 @@ const setup = function () {
   };
 
   const { minGapX, gapV } = spawnData;
-  const bgColor = { r: 38, g: 10, b: 24, a: 255 };
-  const birdColor = { r: 246, g: 200, b: 95, a: 255 };
-  const obsColor = { r: 142, g: 35, b: 72, a: 255 };
+  const bgColor = { r: 38, g: 10, bird: 24, a: 255 };
+  const birdColor = { r: 246, g: 200, bird: 95, a: 255 };
+  const obsColor = { r: 142, g: 35, bird: 72, a: 255 };
 
   const tObstacle = obstacle.create(r.GetScreenWidth(), 0, 40, 300, obsColor);
   const bObstacle = obstacle.create(
@@ -48,7 +48,7 @@ const setup = function () {
   const tObstacles = [tObstacle];
   const bObstacles = [bObstacle];
 
-  const bird = b.createBird(40, screen.WIDTH, 30, 30, 500, birdColor);
+  const bird = bird.create(40, screen.WIDTH, 30, 30, 500, birdColor);
 
   return {
     bird,
@@ -77,7 +77,7 @@ const update = function (w) {
   if (game.state.isOver) return;
 
   const dt = r.GetFrameTime();
-  b.update(bird, gravity, dt);
+  bird.update(bird, gravity, dt);
   obstacle.update(tObs, bObs, obsVelocity, spawnData, obsColor, dt);
 };
 
@@ -88,9 +88,9 @@ const draw = function (w) {
   r.ClearBackground(r.WHITE);
 
   r.DrawRectangle(0, 0, r.GetScreenWidth(), r.GetScreenHeight(), bgColor);
-  b.drawBird(bird);
-  obstacle.drawObstacles(tObstacles);
-  obstacle.drawObstacles(bObstacles);
+  bird.draw(bird);
+  obstacle.draw(tObstacles);
+  obstacle.draw(bObstacles);
 
   r.EndDrawing();
 };
