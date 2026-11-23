@@ -1,6 +1,6 @@
 const r = require("raylib");
 
-const createObstacle = function (x, y, width, height, color) {
+const create = function (x, y, width, height, color) {
   const rec = { x, y, width, height };
 
   return { rec, color };
@@ -39,11 +39,11 @@ const spawnObstacle = function (
   const { minGapX, maxGapX, minH, maxH, gapV } = spawnData;
 
   const x = getRandom(lastObs.x + minGapX, lastObs.x + maxGapX);
-  const height = getRandom(minH, maxH);
+  const height = r.GetRandomValue(minH, maxH);
 
-  tObstacle.push(createObstacle(x, 0, lastObs.width, height, color));
+  tObstacle.push(create(x, 0, lastObs.width, height, color));
   bObstacle.push(
-    createObstacle(
+    create(
       x,
       height + gapV,
       lastObs.width,
@@ -77,7 +77,7 @@ const update = function (tObstacle, bObstacle, velocity, spawnData, color, dt) {
 };
 
 module.exports = {
-  createObstacle,
+  create,
   drawObstacles,
   update,
 };
