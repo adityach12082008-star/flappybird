@@ -6,13 +6,13 @@ const create = function (x, y, width, height, color) {
   return { rec, color };
 };
 
-const draw = function (obstacle) {
+const drawObstacle = function (obstacle) {
   const { rec, color } = obstacle;
   r.DrawRectangleRec(rec, color);
 };
 
-const drawObstacles = function (tObstacle) {
-  for (const obstacle of tObstacle) draw(obstacle, tObstacle);
+const draw = function (tObstacle) {
+  for (const obstacle of tObstacle) drawObstacle(obstacle, tObstacle);
 };
 
 const moveObstacles = function (tObstacle, velocity, dt) {
@@ -78,6 +78,6 @@ const update = function (tObstacle, bObstacle, velocity, spawnData, color, dt) {
 
 module.exports = {
   create,
-  drawObstacles,
+  draw,
   update,
 };
