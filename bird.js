@@ -4,7 +4,7 @@ function create(x, screenWidth, width, height, vVelocity, color) {
   const y = screenWidth / 2;
   const velocity = { x: 0, y: 0 };
   const isStarted = false;
-  const birdVelocity = { x: 0, y: 400 };
+  const birdVelocity = { x: 0, y: vVelocity };
 
   const rec = { x, y, width, height };
 
